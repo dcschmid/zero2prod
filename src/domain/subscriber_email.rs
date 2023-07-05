@@ -3,11 +3,10 @@ use validator::validate_email;
 #[derive(Debug)]
 pub struct SubscriberEmail(String);
 
-
 impl SubscriberEmail {
     pub fn parse(s: String) -> Result<SubscriberEmail, String> {
         if validate_email(&s) {
-        Ok(Self(s))
+            Ok(Self(s))
         } else {
             Err(format!("{} is not a valid subscriber email.", s))
         }
@@ -43,7 +42,7 @@ mod tests {
     fn email_missing_subject_is_rejected() {
         let email = "@domain.com".to_string();
         assert_err!(SubscriberEmail::parse(email));
-    }    
+    }
 
     #[derive(Debug, Clone)]
     struct ValidEmailFixture(pub String);
